@@ -1,1 +1,3 @@
-Please see my [wiki](https://github.com/dagware/DanThomas/wiki)
+* [Keyboard Maestro Macros, Plugins and Videos](Keyboard Maestro Macros, Plugins and Videos)
+* [JavaScript for Automation (JXA)](JavaScript for Automation (JXA))
+* [AppleScript](AppleScript)
