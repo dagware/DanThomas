@@ -10,8 +10,8 @@ function setClipboardToKMMacrosPlistString(str) {
 ```
 
 Uses:
-* [setClipboardStringForType](JXA%2FsetClipboardStringForType)
-* [getClipboardTypes](JXA%2FgetClipboardTypes)
+* [setClipboardStringForType](JXA%2FsetClipboardStringForType.md)
+* [getClipboardTypes](JXA%2FgetClipboardTypes.md)
 
 ## For a complete example, see:
-* [DEMO - Clipboard Read, Write, and KM Action/Macro Plist example](JXA%2FDEMO%20-%20Clipboard%20Read%2C%20Write%2C%20and%20KM%20Action%20Macro%20Plist%20example)
+* [DEMO - Clipboard Read, Write, and KM Action/Macro Plist example](JXA%2FDEMO%20-%20Clipboard%20Read%2C%20Write%2C%20and%20KM%20Action%20Macro%20Plist%20example.md)
