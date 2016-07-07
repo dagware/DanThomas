@@ -16,4 +16,4 @@ function getAllKMGroupsAndMacrosPlist(kme) {
 ```
 
 Also needed:
-* [convertStringToPlist](JXA/convertStringToPlist)
+* [convertStringToPlist](JXA%2FconvertStringToPlist)

@@ -17,13 +17,13 @@ function getKMMacrosPlistStringFromClipboard(types) {
 ```
 
 Uses:
-* [getClipboardStringForType](JXA/getClipboardStringForType)
-* [clipboardContainsType](JXA/clipboardContainsType)
-* [getClipboardTypes](JXA/getClipboardTypes)
-* [kmConstants](JXA/kmConstants)
+* [getClipboardStringForType](JXA%2FgetClipboardStringForType)
+* [clipboardContainsType](JXA%2FclipboardContainsType)
+* [getClipboardTypes](JXA%2FgetClipboardTypes)
+* [kmConstants](JXA%2FkmConstants)
 
 Also see:
-* [getKMActionsPlistStringFromClipboard](JXA/getKMActionsPlistStringFromClipboard)
+* [getKMActionsPlistStringFromClipboard](JXA%2FgetKMActionsPlistStringFromClipboard)
 
 ## For a complete example, see:
-* [DEMO - Clipboard Read, Write, and KM Action/Macro Plist example](JXA/DEMO - Clipboard Read, Write, and KM Action Macro Plist example)
+* [DEMO - Clipboard Read, Write, and KM Action/Macro Plist example](JXA%2FDEMO%20-%20Clipboard%20Read%2C%20Write%2C%20and%20KM%20Action%20Macro%20Plist%20example)

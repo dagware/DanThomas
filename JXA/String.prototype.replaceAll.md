@@ -9,4 +9,4 @@ String.prototype.replaceAll = function replaceAll(find, replace) {
 ```
 
 See also:
-* [escapeRegExp](JXA/escapeRegExp)
+* [escapeRegExp](JXA%2FescapeRegExp)

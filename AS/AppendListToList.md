@@ -15,4 +15,4 @@ on AppendListToList(sourceList, destList)
 end AppendListToList
 ```
 
-See also: [AppendValueToList](AS/AppendValueToList)
+See also: [AppendValueToList](AS%2FAppendValueToList)
