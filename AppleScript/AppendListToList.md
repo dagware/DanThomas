@@ -15,4 +15,4 @@ on AppendListToList(sourceList, destList)
 end AppendListToList
 ```
 
-See also: [AppendValueToList](AppleScript%2FAppendValueToList.md)
+See also: [AppendValueToList](AppendValueToList.md)

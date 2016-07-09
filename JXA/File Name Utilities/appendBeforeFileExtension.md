@@ -13,4 +13,4 @@ function appendBeforeFileExtension(path, value) {
 ```
 
 Uses:
-* [indexOfFileExtension](JXA%2FFile%20Name%20Utilities%2FindexOfFileExtension.md)
+* [indexOfFileExtension](indexOfFileExtension.md)

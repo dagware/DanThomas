@@ -8,4 +8,4 @@ String.prototype.splitAndRemoveBlankLines = function splitAndRemoveBlankLines() 
 ```
 
 Also uses:
-* [Array.prototype.removeBlankLines](JXA%2FPrototypes%20and%20Misc%2FArray.prototype.removeBlankLines.md)
+* [Array.prototype.removeBlankLines](Array.prototype.removeBlankLines.md)

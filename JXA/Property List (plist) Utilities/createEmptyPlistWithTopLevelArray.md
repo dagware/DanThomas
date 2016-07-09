@@ -16,4 +16,4 @@ function createEmptyPlistWithTopLevelArray() {
 ```
 
 Uses:
-* [convertStringToPlist](JXA%2FProperty%20List%20(plist)%20Utilities%2FconvertStringToPlist.md)
+* [convertStringToPlist](convertStringToPlist.md)

@@ -16,4 +16,4 @@ function replaceFileExtension(path, newExt) {
 ```
 
 Uses:
-* [indexOfFileExtension](JXA%2FFile%20Name%20Utilities%2FindexOfFileExtension.md)
+* [indexOfFileExtension](indexOfFileExtension.md)
