@@ -1,3 +1,8 @@
+##Classes
+* [KMEngine](KMEngine.md)
+
+## Code Snippets
+**NOTE:** Many, if not most of the code snippets below will be migrated into Classes in the future. Some of them may already have been. I'll clean this up when I'm finished.
 * [DEMO - Clipboard Read, Write, and KM Action/Macro Plist example](DEMO%20-%20Clipboard%20Read%2C%20Write%2C%20and%20KM%20Action%20and%20Macro%20Plist%20example.md)
 * [getAllKMGroupsAndMacrosPlist](getAllKMGroupsAndMacrosPlist.md)
 * [getKMActionsPlistStringFromClipboard](getKMActionsPlistStringFromClipboard.md)
