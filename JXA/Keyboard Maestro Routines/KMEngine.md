@@ -10,7 +10,7 @@ Methods for using the [Keyboard Maestro](https://www.keyboardmaestro.com/main/) 
 
 ## Functions and Usage
 NOTE: The source is complete (barring any sudden inspiration), but this documentation is a
-![wip-sign.png](resources/CCB7AEA96395B800A043B776CB42F3D6.png)
+  ![wip-sign.png](resources/CCB7AEA96395B800A043B776CB42F3D6.png)
 * [getEngineApp()](#getEngineApp)
 * [calculate()](#calculate)
 * [convertStringToPlist()](#convertStringToPlist)
