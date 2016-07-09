@@ -16,4 +16,4 @@ function getAllKMGroupsAndMacrosPlist(kme) {
 ```
 
 Also needed:
-* [convertStringToPlist](Property%20List%20(plist)%20Utilities%2FconvertStringToPlist.md)
+* [convertStringToPlist](..%2FProperty%20List%20(plist)%20Utilities%2FconvertStringToPlist.md)

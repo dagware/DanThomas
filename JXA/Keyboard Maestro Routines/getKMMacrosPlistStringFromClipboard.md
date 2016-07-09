@@ -17,9 +17,9 @@ function getKMMacrosPlistStringFromClipboard(types) {
 ```
 
 Uses:
-* [getClipboardStringForType](Clipboard%20Utilities%2FgetClipboardStringForType.md)
-* [clipboardContainsType](Clipboard%20Utilities%2FclipboardContainsType.md)
-* [getClipboardTypes](Clipboard%20Utilities%2FgetClipboardTypes.md)
+* [getClipboardStringForType](..%2FClipboard%20Utilities%2FgetClipboardStringForType.md)
+* [clipboardContainsType](..%2FClipboard%20Utilities%2FclipboardContainsType.md)
+* [getClipboardTypes](..%2FClipboard%20Utilities%2FgetClipboardTypes.md)
 * [kmConstants](kmConstants.md)
 
 Also see:
