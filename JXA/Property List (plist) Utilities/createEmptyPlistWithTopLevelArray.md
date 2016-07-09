@@ -3,7 +3,7 @@
 // Creates an empty plist file with a
 // trop-level array.
 // UPDATED: 2016/07/07 18:29 PDT
-function createEmptyPlistWithArray() {
+function createEmptyPlistWithTopLevelArray() {
 	return convertStringToPlist(
 		"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\
 	<!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\">\
@@ -16,4 +16,4 @@ function createEmptyPlistWithArray() {
 ```
 
 Uses:
-* [convertStringToPlist](JXA%2FconvertStringToPlist.md)
+* [convertStringToPlist](JXA%2FProperty%20List%20(plist)%20Utilities%2FconvertStringToPlist.md)

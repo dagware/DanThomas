@@ -1,7 +1,5 @@
 
 ```js
-ObjC.import('AppKit');
-
 // Reads a property list file that was stored as binary.
 // UPDATED: 2016/06/22 08:13 PDT
 function readPlistBinaryFile(filePath) {

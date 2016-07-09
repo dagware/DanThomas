@@ -1,0 +1,5 @@
+* [clipboardContainsType](JXA%2FClipboard%20Utilities%2FclipboardContainsType.md)
+* [getClipboardStringForType](JXA%2FClipboard%20Utilities%2FgetClipboardStringForType.md)
+* [getClipboardTypes](JXA%2FClipboard%20Utilities%2FgetClipboardTypes.md)
+* [getStringFromClipboard](JXA%2FClipboard%20Utilities%2FgetStringFromClipboard.md)
+* [setClipboardStringForType](JXA%2FClipboard%20Utilities%2FsetClipboardStringForType.md)

@@ -16,5 +16,5 @@ function getKMPlistFromClipboard() {
 
 See also:
 
-* [getKMActionsFromClipboard](JXA%2FgetKMActionsPlistStringFromClipboard.md)
-* [getKMMacroAndGroupByMacroUUID](JXA%2FgetKMMacroAndGroupByMacroUUID.md)
+* [getKMActionsFromClipboard](JXA%2FKeyboard%20Maestro%20Routines%2FgetKMActionsPlistStringFromClipboard.md)
+* [getKMMacroAndGroupByMacroUUID](JXA%2FKeyboard%20Maestro%20Routines%2FgetKMMacroAndGroupByMacroUUID.md)

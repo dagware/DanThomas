@@ -1,7 +1,5 @@
 
 ```js
-ObjC.import('AppKit');
-
 // Converts any part of a property list to a string.
 // PARAMETERS:
 // 'plistPart' can contain any part of the property list,

@@ -1,7 +1,5 @@
 
 ```js
-ObjC.import('AppKit');
-
 // Converts an Array (usually an array of dictionaries) to a property list.
 // UPDATED: 2016/06/21 13:10 PDT
 function convertStringToPlist(str) {

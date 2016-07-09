@@ -1,0 +1,7 @@
+* [chooseFile](JXA%2FFile%20Utilities%2FchooseFile.md)
+* [chooseFolder](JXA%2FFile%20Utilities%2FchooseFolder.md)
+* [copyFile](JXA%2FFile%20Utilities%2FcopyFile.md)
+* [deleteFile](JXA%2FFile%20Utilities%2FdeleteFile.md)
+* [directoryContents](JXA%2FFile%20Utilities%2FdirectoryContents.md)
+* [readTextFile](JXA%2FFile%20Utilities%2FreadTextFile.md)
+* [writeTextFile](JXA%2FFile%20Utilities%2FwriteTextFile.md)
