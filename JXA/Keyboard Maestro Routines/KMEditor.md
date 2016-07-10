@@ -3,6 +3,19 @@ Methods for manipulating the [Keyboard Maestro](https://www.keyboardmaestro.com/
 
 [Visit the forum](https://forum.keyboardmaestro.com/) for active discussions.
 
+## [Jump to the Source Code](#source)
+
+---
+
+## Functions and Usage
+NOTE: The source is complete (barring any sudden inspiration), but this documentation is a
+
+![wip-sign.png](resources/CCB7AEA96395B800A043B776CB42F3D6.png)
+
+---
+
+## <a name="source"></a>Source Code
+
 ```js
 var KMEditor = (function() {
 	var _editorAppName = "Keyboard Maestro";
