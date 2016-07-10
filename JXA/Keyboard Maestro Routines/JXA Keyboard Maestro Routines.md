@@ -1,5 +1,6 @@
 ##Classes
 * [KMEngine](KMEngine.md)
+* [KMEditor](KMEditor.md)
 
 ## Code Snippets
 **NOTE:** Many, if not most of the code snippets below will be migrated into Classes in the future. Some of them may already have been. I'll clean this up when I'm finished.
