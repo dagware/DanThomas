@@ -1,3 +1,4 @@
+## JXA Classes and Snippets
 * [ClipboardUtils](ClipboardUtils.md)
 * [PathNameUtils](PathNameUtils.md)
 

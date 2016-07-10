@@ -10,7 +10,6 @@ See https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatte
 ---
 
 ## Functions and Usage
-
 * [appendBeforeFileExtension()](#appendBeforeFileExtension)
 * [combinePathComponents()](#combinePathComponents)
 * [expandLeadingPathTilde()](#expandLeadingPathTilde)
