@@ -1,3 +1,5 @@
+## REPLACED BY [PathNameUtils](..%2FPathNameUtils.md)
+This will be removed as soon.
 
 ```js
 // Returns the index of the start of the extension in a file name,

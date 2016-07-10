@@ -1,3 +1,5 @@
+## REPLACED BY [PathNameUtils](..%2FPathNameUtils.md)
+This will be removed as soon.
 
 ```js
 // Returns the last component of the path, which is often the file

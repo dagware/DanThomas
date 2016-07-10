@@ -1,3 +1,5 @@
+## REPLACED BY [PathNameUtils](..%2FPathNameUtils.md)
+This will be removed as soon.
 
 ```js
 // If the path has a leading tilde ("~"), this expands the path to a

@@ -1,3 +1,5 @@
+## REPLACED BY [PathNameUtils](..%2FPathNameUtils.md)
+This will be removed as soon.
 
 ```js
 // Appends a value before the file extension. If no file extension, the

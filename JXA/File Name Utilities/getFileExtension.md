@@ -1,3 +1,5 @@
+## REPLACED BY [PathNameUtils](..%2FPathNameUtils.md)
+This will be removed as soon.
 
 ```js
 // Returns the file extension including the leading period, if any,

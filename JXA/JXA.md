@@ -3,7 +3,7 @@
 * [PathNameUtils](PathNameUtils.md)
 
 ### Converted, or being converted to classes:
-* [File Name Utilities](File%20Name%20Utilities%2FJXA%20File%20Name%20Utilities.md)
+* [<del>File Name Utilities</del>](File%20Name%20Utilities%2FJXA%20File%20Name%20Utilities.md)
 * [File Utilities](File%20Utilities%2FJXA%20File%20Utilities.md)
 * [Keyboard Maestro Routines](Keyboard%20Maestro%20Routines%2FJXA%20Keyboard%20Maestro%20Routines.md)
 * [Property List (plist) Utilities](Property%20List%20(plist)%20Utilities%2FJXA%20Property%20List%20(plist)%20Utilities.md)
