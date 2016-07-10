@@ -20,6 +20,7 @@ See https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatte
 * [removeLastPathComponent()](#removeLastPathComponent)
 * [removeTrailingSlash()](#removeTrailingSlash)
 * [replaceFileExtension()](#replaceFileExtension)
+
 ---
 
 ### <a name="appendBeforeFileExtension"></a>PathNameUtils.appendBeforeFileExtension(path, value)
