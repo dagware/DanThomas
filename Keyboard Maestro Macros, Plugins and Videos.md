@@ -25,6 +25,7 @@
 * [Bootstrap 3 + Auto-Complete HTML Prompt Example](https://forum.keyboardmaestro.com/t/bootstrap-3-auto-complete-html-prompt-example/3618)
 
 ## Other Macros
+* [MACRO: Set Var to Folder and Verify Existence (Sub-Macro)](https://forum.keyboardmaestro.com/t/macro-set-var-to-folder-and-verify-existence-sub-macro/4346)
 * [MACRO: Get Recently Run Macros](https://forum.keyboardmaestro.com/t/macro-get-recently-run-macros/4309)
 * [Put an Icon & Menu on your Mac OS/X Menu Bar](https://forum.keyboardmaestro.com/t/put-an-icon-menu-on-your-mac-os-x-menu-bar/3677)
 * [Paste and Delete from History](https://forum.keyboardmaestro.com/t/paste-and-delete-from-history/3687)

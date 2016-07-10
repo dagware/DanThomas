@@ -2,6 +2,10 @@
 Methods for manipulating the [Keyboard Maestro](https://www.keyboardmaestro.com/main/) Editor's Automation features.
 
 [Visit the forum](https://forum.keyboardmaestro.com/) for active discussions.
+### NOTE: ###
+This class uses the "Module" Design Pattern. Basically, anything in the "return" statement is public, everything before it is private.
+
+See https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript
 
 ## [Jump to the Source Code](#source)
 

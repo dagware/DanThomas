@@ -12,14 +12,12 @@ ObjC.import('AppKit');
 //          deal either way.
 // UPDATED: 2016/07/05 08:44 PDT
 function getKMActionsPlistStringFromClipboard(types) {
-	return getClipboardStringForType(kmConstants.actionsClipboardType, types);
+	return ClipboardUtils.getClipboardStringForType(kmConstants.actionsClipboardType, types);
 }
 ```
 
 Uses:
-* [getClipboardStringForType](..%2FClipboard%20Utilities%2FgetClipboardStringForType.md)
-* [clipboardContainsType](..%2FClipboard%20Utilities%2FclipboardContainsType.md)
-* [getClipboardTypes](..%2FClipboard%20Utilities%2FgetClipboardTypes.md)
+* [ClipboardUtils](..%2FClipboardUtils.md)
 * [kmConstants](kmConstants.md)
 
 Also see:

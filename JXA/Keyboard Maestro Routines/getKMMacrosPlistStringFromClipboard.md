@@ -12,18 +12,13 @@ ObjC.import('AppKit');
 //          deal either way.
 // UPDATED: 2016/07/05 08:44 PDT
 function getKMMacrosPlistStringFromClipboard(types) {
-	return getClipboardStringForType(kmConstants.macrosClipboardType, types);
+	return ClipboardUtils.getClipboardStringForType(kmConstants.macrosClipboardType, types);
 }
 ```
 
 Uses:
-* [getClipboardStringForType](..%2FClipboard%20Utilities%2FgetClipboardStringForType.md)
-* [clipboardContainsType](..%2FClipboard%20Utilities%2FclipboardContainsType.md)
-* [getClipboardTypes](..%2FClipboard%20Utilities%2FgetClipboardTypes.md)
+* [ClipboardUtils](..%2FClipboardUtils.md)
 * [kmConstants](kmConstants.md)
-
-Also see:
-* [getKMActionsPlistStringFromClipboard](getKMActionsPlistStringFromClipboard.md)
 
 ## For a complete example, see:
 * [DEMO - Clipboard Read, Write, and KM Action/Macro Plist example](DEMO%20-%20Clipboard%20Read%2C%20Write%2C%20and%20KM%20Action%20and%20Macro%20Plist%20example.md)

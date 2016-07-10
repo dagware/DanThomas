@@ -3,6 +3,10 @@
 Methods for using the [Keyboard Maestro](https://www.keyboardmaestro.com/main/) Engine's Automation features.
 
 [Visit the forum](https://forum.keyboardmaestro.com/) for active discussions.
+### NOTE: ###
+This class uses the "Module" Design Pattern. Basically, anything in the "return" statement is public, everything before it is private.
+
+See https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript
 
 ## [Jump to the Source Code](#source)
 
@@ -18,6 +22,7 @@ NOTE: The source is complete (barring any sudden inspiration), but this document
 * [Source Code](#source)
 
 ---
+
 ### <a name="getEngineApp"></a>KMEngine.getEngineApp()
 **PURPOSE:**
 Returns an Application object for the KM Engine. The object is cached, so subsequent calls return the same object.
