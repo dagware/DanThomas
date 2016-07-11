@@ -10,6 +10,8 @@ See https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatte
 ---
 
 ## Functions and Usage
+
+* [addTrailingSlash()](#addTrailingSlash)
 * [appendBeforeFileExtension()](#appendBeforeFileExtension)
 * [combinePathComponents()](#combinePathComponents)
 * [expandLeadingPathTilde()](#expandLeadingPathTilde)
@@ -20,6 +22,12 @@ See https://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatte
 * [removeLastPathComponent()](#removeLastPathComponent)
 * [removeTrailingSlash()](#removeTrailingSlash)
 * [replaceFileExtension()](#replaceFileExtension)
+
+---
+
+### <a name="addTrailingSlash"></a>PathNameUtils.addTrailingSlash(path)
+**PURPOSE:**
+Adds a trailing slash if there isn't one already.
 
 ---
 
@@ -125,6 +133,10 @@ PathNameUtils.appendBeforeFileExtension('test.txt', '.abc')
 	// ======= BEGIN CLASS SOURCE CODE =========================================
 	var PathNameUtils = (function() {
 		return {
+			addTrailingSlash: function(path) {
+				return path.endsWith("/") ? path : path + "/";
+			},
+			
 			appendBeforeFileExtension: function(path, value) {
 				var i = this.indexOfFileExtension(path);
 				return i > 0 ?
