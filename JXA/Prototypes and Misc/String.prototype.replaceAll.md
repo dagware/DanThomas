@@ -4,9 +4,9 @@
 // "find" for regex's.
 // UPDATED: 2016/06/22 08:17 PDT
 String.prototype.replaceAll = function replaceAll(find, replace) {
-	return this.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+	return this.replace(new RegExp(find.escapeRegExp, 'g'), replace);
 }
 ```
 
 See also:
-* [escapeRegExp](escapeRegExp.md)
+* [String.prototype.escapeRegExp](String.prototype.escapeRegExp.md)

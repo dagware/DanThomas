@@ -28,31 +28,41 @@ Clears the contents of the clipboard.
 
 ---
 
-### <a name="clipboardContainsType"></a>ClipboardUtils.clipboardContainsType(type)
+### <a name="clipboardContainsType"></a>ClipboardUtils.clipboardContainsType(_type_)
 **PURPOSE:**
-Returns true if the specified "type" is on the clipboard.
+Returns **true** if _type_ is on the clipboard.
+
+**PARAMETERS:**
+_type_: A string value representing the clipboard type.
 
 ---
 
-### <a name="getClipboardString"></a>ClipboardUtils.getClipboardString(throwIfNotFound)
+### <a name="getClipboardString"></a>ClipboardUtils.getClipboardString(_throwIfNotFound_)
 **PURPOSE:**
-Gets a string from the clipboard - any type of string available.
+Returns trhe current clipboard contents as a if possible.
 
-If the clipboard doesn't contain string content, the result will be an empty string unless 'throwIfNotFound' is true, in which case an exception is thrown.
+If the clipboard doesn't contain string content, the result will be an empty string unless _throwIfNotFound_ is **true**, in which case an exception is thrown.
+
+**PARAMETERS:**
+_throwIfNotFound_: OPTIONAL. Default **false**. If **true** and a string value can't be retrieved from the clipboard, an exception is thrown.
 
 ---
 
-### <a name="getClipboardStringForType"></a>ClipboardUtils.getClipboardStringForType(type, throwIfNotFound)
+### <a name="getClipboardStringForType"></a>ClipboardUtils.getClipboardStringForType(_type_, _throwIfNotFound_)
 **PURPOSE:**
-Gets a string of the specified type from the clipboard.
+Returns a string of the specified clipboard type from the clipboard.
 
-If the clipboard doesn't contain the specified type, the result will be an empty string unless 'throwIfNotFound' is true, in which case an exception is thrown.
+If the clipboard doesn't contain the specified type, the result will be an empty string unless _throwIfNotFound_ is true, in which case an exception is thrown.
+
+**PARAMETERS:**
+_type_: A string value representing the desired clipboard type.
+_throwIfNotFound_: OPTIONAL. Default **false**. If **true** and a string value of the specified format can't be retrieved from the clipboard, an exception is thrown.
 
 ---
 
 ### <a name="getClipboardTypes"></a>ClipboardUtils.getClipboardTypes()
 **PURPOSE:**
-Returns an array of strings containing all the clipboard types currently present on the clipboard.
+Returns an array of strings containing all the clipboard types currently present on the clipboard. If the clipboard is empty, a zero-length array is returned.
 
 ---
 
@@ -62,15 +72,22 @@ Returns the clipboard type for plain text, e.g. "public.utf8-plain-text".
 
 ---
 
-### <a name="setClipboardString"></a>PathNameUtils.setClipboardString(str)
+### <a name="setClipboardString"></a>PathNameUtils.setClipboardString(_str_)
 **PURPOSE:**
-Sets the clipboard to the specified string.
+Sets the clipboard to _str_.
+
+**PARAMETERS:**
+_str_: The string value to place on the clipboard.
 
 ---
 
-### <a name="setClipboardStringForType"></a>ClipboardUtils.setClipboardStringForType(str, type)
+### <a name="setClipboardStringForType"></a>ClipboardUtils.setClipboardStringForType(_str_, _type_)
 **PURPOSE:**
 Sets the clipboard to the string of the specified type.
+
+**PARAMETERS:**
+_str_: The string value to place on the clipboard.
+_type_: A string value representing the clipboard type.
 
 ---
 
@@ -89,12 +106,11 @@ The code below that are test cases.
 	ObjC.import('AppKit');
 
 	var ClipboardUtils = (function() {
-		var _plainTextClipboardType = "public.utf8-plain-text";
-		var _currentApp = undefined;
-
 		return {
 			clearContents: function() {
+				/*jshint -W030 */
 				$.NSPasteboard.generalPasteboard.clearContents;
+				/*jshint +W030 */
 			},
 
 			clipboardContainsType: function(type) {
@@ -103,7 +119,7 @@ The code below that are test cases.
 
 			getClipboardString: function(throwIfNotFound) {
 				return this.getClipboardStringForType(
-					_plainTextClipboardType, throwIfNotFound);
+					this.getPlainTextClipboardType(), throwIfNotFound);
 			},
 
 			getClipboardStringForType: function(type, throwIfNotFound) {
@@ -118,34 +134,33 @@ The code below that are test cases.
 
 			getClipboardTypes: function() {
 				var items = $.NSPasteboard.generalPasteboard.pasteboardItems;
-				if (items.count == 0)
+				if (items.count === 0)
 					return [];
 
 				return ObjC.deepUnwrap(items.js[0].types);
 			},
 
 			getPlainTextClipboardType: function() {
-				return _plainTextClipboardType;
+				return $.NSPasteboardTypeString.js;
 			},
 
 			setClipboardString: function(str) {
-				this.setClipboardStringForType(str, _plainTextClipboardType);
+				this.setClipboardStringForType(str, this.getPlainTextClipboardType());
 			},
 
 			setClipboardStringForType: function(str, type) {
 				var clipboard = $.NSPasteboard.generalPasteboard;
+				/*jshint -W030 */
 				clipboard.clearContents;
+				/*jshint +W030 */
 				clipboard.setStringForType($(str), $(type));
 			}
-		}
+		};
 	})();
 	// ======= END CLASS SOURCE CODE ===========================================
 
-
-
-
-
 	// ======= BEGIN TEST AND DEMO CODE ========================================
+
 	function testMethod(expression) {
 		eval(expression);
 		console.log(expression);
@@ -174,7 +189,7 @@ The code below that are test cases.
 		try {
 			eval(expression);
 		} catch (e) {
-			if (!expectedExceptionMessage || e.message === expectedExceptionMessage) {
+			if (!expectedExceptionMessage || e.message.includes(expectedExceptionMessage)) {
 				console.log(expression + ' --> "' + e.message + '"');
 			} else {
 				console.log(' \n** UNEXPECTED EXCEPTION MESSAGE ***********\n' +
@@ -196,14 +211,15 @@ The code below that are test cases.
 	testFunction("ClipboardUtils.getPlainTextClipboardType()", "public.utf8-plain-text");
 	testMethod("ClipboardUtils.setClipboardString('Hello World!')");
 	testFunction("ClipboardUtils.getClipboardString()", "Hello World!");
-	
+
 	ClipboardUtils.clearContents();
 	testFunction("ClipboardUtils.getClipboardTypes().length", 0);
 	testFunction("ClipboardUtils.clipboardContainsType('public.utf8-plain-text')", false);
 	testFunction("ClipboardUtils.getClipboardString()", "");
 	testException("ClipboardUtils.getClipboardString(true)", "No clipboard data for specified type");
 	testFunction("ClipboardUtils.getClipboardStringForType('public.utf8-plain-text')", "");
-	testException("ClipboardUtils.getClipboardStringForType('public.utf8-plain-text', true)", "No clipboard data for specified type");
+	testException("ClipboardUtils.getClipboardStringForType('public.utf8-plain-text', true)",
+		"No clipboard data for specified type");
 	// ======= END TEST AND DEMO CODE ==========================================
 
 })()

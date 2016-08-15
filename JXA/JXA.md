@@ -3,7 +3,10 @@
 
 ## JXA Classes and Snippets
 * [ClipboardUtils](ClipboardUtils.md)
+* [FileUtils](FileUtils.md)
+* [KMEngine](KMEngine.md)
 * [PathNameUtils](PathNameUtils.md)
+* [PlistUtils](PlistUtils.md)
 
 ### Converted, or being converted to classes:
 * [<del>File Name Utilities</del>](File%20Name%20Utilities%2FJXA%20File%20Name%20Utilities.md)
