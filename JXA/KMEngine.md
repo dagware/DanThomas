@@ -18,11 +18,19 @@ var KMEngine = (function() {
 			this.setVariable(name, "%Delete%");
 		},
 
-		doScript: function(uuidOrUniqueNameOrScript, parameter) {
+		doScript: function(uuidOrUniqueNameOrScript, parameter, timeout) {
 			if (parameter) {
-				this.getEngineApp().doScript(uuidOrUniqueNameOrScript, { withParameter: parameter });
+				if (timeout) {
+					this.getEngineApp().doScript(uuidOrUniqueNameOrScript, { withParameter: parameter }, { timeout: timeout });
+				} else {
+					this.getEngineApp().doScript(uuidOrUniqueNameOrScript, { withParameter: parameter });
+				}
 			} else {
-				this.getEngineApp().doScript(uuidOrUniqueNameOrScript);
+				if (timeout) {
+					this.getEngineApp().doScript(uuidOrUniqueNameOrScript, { timeout: timeout });
+				} else {
+					this.getEngineApp().doScript(uuidOrUniqueNameOrScript);
+				}
 			}
 		},
 
@@ -102,6 +110,38 @@ var KMEngine = (function() {
 		getVariable: function(name, required) {
 			var result = this.getEngineApp().getvariable(name);
 			if (!result && required)
+				throw Error("Variable '" + name + "' is empty");
+			return result;
+		},
+
+		getValueForVariableContainingVariableName: function(nameOfVariableContainingVariableName,
+			nameOfVariableContainingVariableNameIsRequired,
+			valueIsRequired) {
+			var variableName = this.getVariable(nameOfVariableContainingVariableName,
+				nameOfVariableContainingVariableNameIsRequired);
+			if (!variableName)
+				return "";
+			return this.getVariable(variableName, valueIsRequired);
+		},
+
+		getKMVariableAsLines: function(variableName, required, options) {
+			if (!options)
+				options = {
+					trimLines: true,
+					removeBlankLines: true
+				};
+			var result = this.getVariable(variableName, required).split(/[\r\n]+/);
+			if (options.trimLines) {
+				result = result.map(function(line) {
+					return line.trim();
+				});
+			}
+			if (options.removeBlankLines) {
+				result = result.filter(function(line) {
+					return line.length > 0;
+				});
+			}
+			if (required && result.length === 0)
 				throw Error("Variable '" + name + "' is empty");
 			return result;
 		},

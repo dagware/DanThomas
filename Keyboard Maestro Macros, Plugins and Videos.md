@@ -9,6 +9,7 @@
 * [PLUGIN: Snap Palette to Front Window](https://forum.keyboardmaestro.com/t/snap-palette-to-front-window-plugin-action/3880)
 * [MACRO: Sticky Palettes! They move when you do!](https://forum.keyboardmaestro.com/t/sticky-palettes-they-move-when-you-do/3935)
 * [MACRO: Renumber Macro Prefix Numbers](https://forum.keyboardmaestro.com/t/macro-renumber-macro-prefix-numbers/4011)
+* [MACRO: Special Characters Palette](https://forum.keyboardmaestro.com/t/macro-special-characters-palette/4683)
 
 ## Sub-Macro Support
 * [MACRO: Execute Macro by Name (Sub-Macro)](https://forum.keyboardmaestro.com/t/macro-execute-macro-by-name-sub-macro/4304)
@@ -26,8 +27,10 @@
 * [MACRO: Run Current Macro](https://forum.keyboardmaestro.com/t/macro-run-current-macro/4333)
 * [MACRO: Reveal Macro Group](https://forum.keyboardmaestro.com/t/macro-reveal-macro-group/4186)
 * [MACRO: Get Selected Macro UUID and Name](https://forum.keyboardmaestro.com/t/macro-get-selected-macro-uuid-and-name-without-the-clipboard/4330)
+* [MACRO: Get Initial Comment from First Selected Macro](https://forum.keyboardmaestro.com/t/macro-get-initial-comment-from-first-selected-macro/4718)
 
 ## Examples
+* [MACRO Example: Triggering a Macro when it is Already Running](https://forum.keyboardmaestro.com/t/macro-example-triggering-a-macro-when-it-is-already-running/4720)
 * [MACRO: Prompt Validation Example](https://forum.keyboardmaestro.com/t/macro-prompt-validation-example/4284)
 * [MACRO Example: Swift Script returning list of variable names from KME](https://forum.keyboardmaestro.com/t/macro-example-swift-script-returning-list-of-variable-names-from-kme/4052)
 * [Get/Set Value of Variable by Name - Macro Examples 

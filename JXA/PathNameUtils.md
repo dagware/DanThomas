@@ -47,14 +47,15 @@ _value_: The value to be appended.
 
 ---
 
-### <a name="combinePathComponents"></a>PathNameUtils.combinePathComponents(_path1_, _path2_)
+### <a name="combinePathComponents"></a>PathNameUtils.combinePathComponents(_path1_, _path2_, _path3_)
 
 **PURPOSE:**
-Combines the two path components in such a way as to make sure there is one and only one slash between the two components, and returns the result.
+Combines the two or three path components in such a way as to make sure there is one and only one slash between the components, and returns the result.
 
 **PARAMETERS:**
 _path1_: The first path component.
-_path_: The second path component.
+_path2_: The second path component.
+_path3_: OPTIONAL. The third path component.
 
 ---
 
@@ -186,12 +187,15 @@ PathNameUtils.appendBeforeFileExtension('test.txt', '.abc')
 					path + value;
 			},
 
-			combinePathComponents: function(path1, path2) {
+			combinePathComponents: function(path1, path2, path3) {
 				if (path1.endsWith("/"))
 					path1 = path1.substring(0, path1.length - 1);
 				if (path2.startsWith("/"))
 					path2 = path2.substring(1);
-				return path1 + "/" + path2;
+				var result = path1 + "/" + path2;
+				if (path3)
+					result = this.combinePathComponents(result, path3);
+				return result;
 			},
 
 			expandLeadingPathTilde: function(path) {
@@ -241,30 +245,27 @@ PathNameUtils.appendBeforeFileExtension('test.txt', '.abc')
 
 			removeTrailingSlash: function(path) {
 				if (path.endsWith("/"))
-					return path = path.substring(0, path.length - 1);
+					return path.substring(0, path.length - 1);
 				return path;
 			},
 
 			replaceFileExtension: function(path, newExt) {
 				if (!newExt) {
-					newExt = ""
+					newExt = "";
 				} else if (!newExt.startsWith(".")) {
 					newExt = "." + newExt;
 				}
 				var i = this.indexOfFileExtension(path);
 				return (i <= 0) ? path + newExt : path.substring(0, i) + newExt;
 			}
-		}
+		};
 	})();
 	// ======= END CLASS SOURCE CODE ===========================================
-
-
-
 
 	// ======= BEGIN TEST AND DEMO CODE ========================================
 	function test(expression, expectedResult, isRegex) {
 		var result = eval(expression);
-		var hasExpectedResult = expectedResult != undefined;
+		var hasExpectedResult = expectedResult !== undefined;
 		if (!hasExpectedResult ||
 			(!isRegex && result === expectedResult) ||
 			(isRegex && result.search(expectedResult) >= 0)) {
@@ -316,5 +317,5 @@ PathNameUtils.appendBeforeFileExtension('test.txt', '.abc')
 	test("PathNameUtils.replaceFileExtension('/folder/test', '.txt')", "/folder/test.txt");
 	// ======= END TEST AND DEMO CODE ==========================================
 
-})()
+})();
 ```
