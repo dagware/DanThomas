@@ -22,6 +22,8 @@
 
 ## KM Editor Stuff
 
+* [MACRO: KMFAM Favorite Actions and Macros](https://forum.keyboardmaestro.com/t/macro-kmfam-favorite-actions-and-macros/4854)
+  * Demo/Tutorial Video: https://youtu.be/it8Ni-t0RMo
 * [Macro Import Manager (MIM) BETA v0.9.0](https://forum.keyboardmaestro.com/t/new-macro-import-manager-mim-beta-v0-9-0/4387)
 * [MACRO: Macro Spotlight](https://forum.keyboardmaestro.com/t/macro-macro-spotlight/4446)
 * [MACRO: Run Current Macro](https://forum.keyboardmaestro.com/t/macro-run-current-macro/4333)
