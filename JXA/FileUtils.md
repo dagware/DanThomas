@@ -98,7 +98,7 @@ var FileUtils = (function() {
 				.fileExistsAtPathIsDirectory(path, isDirectory);
 			return {
 				exists: exists,
-				isFile: isDirectory[0] !== 1
+				isFile: !isDirectory[0]
 			};
 		},
 

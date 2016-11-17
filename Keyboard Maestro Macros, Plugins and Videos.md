@@ -24,12 +24,14 @@
 
 * [MACRO: KMFAM Favorite Actions and Macros](https://forum.keyboardmaestro.com/t/macro-kmfam-favorite-actions-and-macros/4854)
   * Demo/Tutorial Video: https://youtu.be/it8Ni-t0RMo
+* [MACRO: Get Current Macro Info](https://forum.keyboardmaestro.com/t/macro-get-current-macro-info/5477)
 * [Macro Import Manager (MIM) BETA v0.9.0](https://forum.keyboardmaestro.com/t/new-macro-import-manager-mim-beta-v0-9-0/4387)
 * [MACRO: Macro Spotlight](https://forum.keyboardmaestro.com/t/macro-macro-spotlight/4446)
 * [MACRO: Run Current Macro](https://forum.keyboardmaestro.com/t/macro-run-current-macro/4333)
 * [MACRO: Reveal Macro Group](https://forum.keyboardmaestro.com/t/macro-reveal-macro-group/4186)
 * [MACRO: Get Selected Macro UUID and Name](https://forum.keyboardmaestro.com/t/macro-get-selected-macro-uuid-and-name-without-the-clipboard/4330)
 * [MACRO: Get Initial Comment from First Selected Macro](https://forum.keyboardmaestro.com/t/macro-get-initial-comment-from-first-selected-macro/4718)
+* [MACRO: Find All Broken Execute Macro Actions](https://forum.keyboardmaestro.com/t/macro-find-all-broken-execute-macro-actions/4882)
 
 ## Examples
 * [MACRO Example: Triggering a Macro when it is Already Running](https://forum.keyboardmaestro.com/t/macro-example-triggering-a-macro-when-it-is-already-running/4720)
@@ -43,6 +45,8 @@ macro](https://forum.keyboardmaestro.com/t/get-set-value-of-variable-by-name-mac
 * [Bootstrap 3 + Auto-Complete HTML Prompt Example](https://forum.keyboardmaestro.com/t/bootstrap-3-auto-complete-html-prompt-example/3618)
 
 ## Other Macros
+* [MACRO: HotKey Multi-Press (Multi-Tap) Template](https://forum.keyboardmaestro.com/t/macro-hotkey-multi-press-template-double-press-triple-press-etc/5242)
+* [MACRO: Import Quick Macro](https://forum.keyboardmaestro.com/t/macro-import-quick-macro/4903)
 * [MACRO: Replace Text Keep Initial Case v1.0](https://forum.keyboardmaestro.com/t/macro-replace-text-keep-initial-case-v1-0/4425)
 * [MACRO: Set Var to Folder and Verify Existence (Sub-Macro)](https://forum.keyboardmaestro.com/t/macro-set-var-to-folder-and-verify-existence-sub-macro/4346)
 * [MACRO: Get Recently Run Macros](https://forum.keyboardmaestro.com/t/macro-get-recently-run-macros/4309)
