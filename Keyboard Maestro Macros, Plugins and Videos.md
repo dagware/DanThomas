@@ -25,6 +25,7 @@
 * [MACRO: KMFAM Favorite Actions and Macros](https://forum.keyboardmaestro.com/t/macro-kmfam-favorite-actions-and-macros/4854)
   * Demo/Tutorial Video: https://youtu.be/it8Ni-t0RMo
 * [MACRO: Get Current Macro Info](https://forum.keyboardmaestro.com/t/macro-get-current-macro-info/5477)
+* [Macro Import Manager Lite (MIM Lite) v1.0](https://forum.keyboardmaestro.com/t/macro-import-manager-lite-mim-lite-v1-0/5581)
 * [Macro Import Manager (MIM) BETA v0.9.0](https://forum.keyboardmaestro.com/t/new-macro-import-manager-mim-beta-v0-9-0/4387)
 * [MACRO: Macro Spotlight](https://forum.keyboardmaestro.com/t/macro-macro-spotlight/4446)
 * [MACRO: Run Current Macro](https://forum.keyboardmaestro.com/t/macro-run-current-macro/4333)
@@ -45,6 +46,7 @@ macro](https://forum.keyboardmaestro.com/t/get-set-value-of-variable-by-name-mac
 * [Bootstrap 3 + Auto-Complete HTML Prompt Example](https://forum.keyboardmaestro.com/t/bootstrap-3-auto-complete-html-prompt-example/3618)
 
 ## Other Macros
+* [MACRO: Format Script for Display (Sub-Macro)](https://forum.keyboardmaestro.com/t/macro-format-script-for-display-sub-macro/5616)
 * [MACRO: HotKey Multi-Press (Multi-Tap) Template](https://forum.keyboardmaestro.com/t/macro-hotkey-multi-press-template-double-press-triple-press-etc/5242)
 * [MACRO: Import Quick Macro](https://forum.keyboardmaestro.com/t/macro-import-quick-macro/4903)
 * [MACRO: Replace Text Keep Initial Case v1.0](https://forum.keyboardmaestro.com/t/macro-replace-text-keep-initial-case-v1-0/4425)

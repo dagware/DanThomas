@@ -1,5 +1,6 @@
 
 ```js
+// ======= BEGIN CLASS SOURCE CODE =========================================
 // THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES,
 // INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
 // AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL
@@ -98,7 +99,7 @@ var FileUtils = (function() {
 				.fileExistsAtPathIsDirectory(path, isDirectory);
 			return {
 				exists: exists,
-				isFile: !isDirectory[0]
+				isFile: isDirectory[0] !== 1
 			};
 		},
 
@@ -160,17 +161,15 @@ var FileUtils = (function() {
 		},
 
 		writeTextFile: function(strContent, strPath) {
-			var error;
 			var str = $.NSString.alloc.initWithUTF8String(strContent);
-			str.writeToFileAtomicallyEncodingError(
+			var result = str.writeToFileAtomicallyEncodingError(
 				$(strPath).stringByStandardizingPath,
 				true,
 				$.NSUTF8StringEncoding,
 				null);
-			if (error)
-				throw Error('Could not write file "' + strPath + '"');
-		},
-
+			if (!result)
+				throw Error("Could not write file '" + strPath + "'");
+		}
 	};
 })();
 
