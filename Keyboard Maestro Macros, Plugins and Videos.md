@@ -4,6 +4,8 @@
 * [MACRO: Go To Macro by Name (Spotlight)](https://forum.keyboardmaestro.com/t/macro-go-to-macro-by-name-spotlight/4666)
 * [MACRO: Go To Group by Name (Spotlight)
 ](https://forum.keyboardmaestro.com/t/macro-go-to-group-by-name-spotlight/4668)
+* [MACRO: Spotlight KM Variables](https://forum.keyboardmaestro.com/t/macro-spotlight-km-variables/5644)
+* [MACRO: Pick and Insert 'Execute a Macro' (Spotlight)](https://forum.keyboardmaestro.com/t/macro-pick-and-insert-execute-a-macro-spotlight/5657)
 
 ## Palettes
 * [PLUGIN: Snap Palette to Front Window](https://forum.keyboardmaestro.com/t/snap-palette-to-front-window-plugin-action/3880)
@@ -57,6 +59,8 @@ macro](https://forum.keyboardmaestro.com/t/get-set-value-of-variable-by-name-mac
 * [MACRO(s): Debug JXA from Atom, Finish Debugging JXA from Atom](https://forum.keyboardmaestro.com/t/macro-s-debug-jxa-from-atom-finish-debugging-jxa-from-atom/4162)
 
 ## Published Plugins
+* [Stopwatch](https://forum.keyboardmaestro.com/t/plugin-stopwatch-elapsed-time-calculator/5637)
+* [Format Elapsed Time](https://forum.keyboardmaestro.com/t/plugin-format-elapsed-time-updated-v1-1/5636)
 * [Show Notification Message](https://forum.keyboardmaestro.com/t/show-notification-message/3864)
 * [XML Escape](https://forum.keyboardmaestro.com/t/xml-escape/3840)
 

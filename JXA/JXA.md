@@ -4,6 +4,7 @@
 ## JXA Classes and Snippets
 * [ClipboardUtils](ClipboardUtils.md)
 * [FileUtils](FileUtils.md)
+* [KMEditor](KMEditor.md)
 * [KMEngine](KMEngine.md)
 * [PathNameUtils](PathNameUtils.md)
 * [PlistUtils](PlistUtils.md)
