@@ -48,6 +48,7 @@ macro](https://forum.keyboardmaestro.com/t/get-set-value-of-variable-by-name-mac
 * [Bootstrap 3 + Auto-Complete HTML Prompt Example](https://forum.keyboardmaestro.com/t/bootstrap-3-auto-complete-html-prompt-example/3618)
 
 ## Other Macros
+* [MACROS: Mount Drive, Unmount Drive, Check if Drive is Mounted](https://forum.keyboardmaestro.com/t/macros-mount-drive-unmount-drive-check-if-drive-is-mounted/5713)
 * [MACRO: Format Script for Display (Sub-Macro)](https://forum.keyboardmaestro.com/t/macro-format-script-for-display-sub-macro/5616)
 * [MACRO: HotKey Multi-Press (Multi-Tap) Template](https://forum.keyboardmaestro.com/t/macro-hotkey-multi-press-template-double-press-triple-press-etc/5242)
 * [MACRO: Import Quick Macro](https://forum.keyboardmaestro.com/t/macro-import-quick-macro/4903)
