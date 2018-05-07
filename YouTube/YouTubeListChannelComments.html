@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html>
+<!--
+Version 0.02
+-->
+	<head>
+		<!--
+		File "YouTubeListChannelComments_ChannelIds.js" must contain the following:
+
+		var YourApiKey = "actual value";
+		var YourChannelId =  "actual value";
+		-->
+		<script type="text/javascript" src="YouTubeListChannelComments_ChannelIds.js"></script>
+
+
+
+		<title>YouTube Channel Comments</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+		<!-- ======== Top and Content =============================== -->
+		<style type="text/css">
+			html,
+			body,
+			.page {
+				height: 100%;
+			}
+
+			body {
+				overflow: hidden;
+				margin: 0;
+				font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+				font-size: 14px;
+			}
+
+			.page {
+				display: flex;
+				flex-direction: column;
+			}
+
+			header, footer {
+				background: white;
+				color: black;
+			}
+
+			header {
+				flex: 0 0 auto;
+				min-height: 60px;
+				text-align: center;
+				font-size: 22px
+			}
+
+			#content {
+				flex: 1 1 auto;
+				position: relative;
+				overflow-y: auto;
+				padding-left: 20px;
+				padding-right: 20px;
+				background: white;
+			}
+		</style>
+
+		<!-- ======== Bottom Styles =============================== -->
+		<style type="text/css">
+			footer {
+				flex: 0 0 auto;
+				min-height: 50px;
+				padding-top: 10px;
+				padding-bottom: 20px;
+				font-size: 12px;
+			}
+		</style>
+
+		<!-- ======== Other Styles =============================== -->
+		<style type="text/css">
+			.hidden {
+				display: none;
+			}
+			.tableInner {
+				width: 100%;
+				height: 100%;
+			}
+			table {
+				border-collapse: collapse;
+				cellpadding: 0;
+				cellspacing: 0;
+			}
+			.tdPaddingTop {
+				padding-top: 20px;
+			}
+			.tdThreadSeparator {
+				padding-top: 10px;
+				/* padding-bottom : 20px; */
+			}
+			.tdIndent {
+				padding-left: 40px;
+			}
+			.tdAuthor {
+				/* color: blue; */
+			}
+			.tableAuthor td:nth-child(2) {
+				padding-left: 10px;
+				padding-right: 10px;
+			}
+			.tdAuthorThumbnail {
+				vertical-align: top;
+				width: 52px;
+				padding-top: 4px;
+			}
+			.tdVideoThumbnail {
+				vertical-align: top;
+				padding-top: 24px;
+			}
+			.tdThreadTable {
+				vertical-align: top;
+			}
+			.videoThumbnailImage {
+				width: 106px;
+    			height: 59px;
+			}
+			.tdText {
+				white-space: pre-line;
+				vertical-align: top;
+			}
+			.tdUrl {
+			}
+			.footerTable {
+				/* width: 400px; */
+			}
+			/* .footerTable td:nth-child(2) {
+				text-align: right;
+			} */
+			.dvFooter {
+				padding-left: 20px;
+				padding-right: 20px;
+			}
+		</style>
+
+		<!-- ==================== Prorotypes, Helper Functions =============================== -->
+		<script type="text/javascript">
+			Node.prototype.toggleClass = function toggleClass(className, include) {
+				var classNames = this.className.split(" ");
+				var index = classNames.indexOf(className);
+				if (include) {
+					if (index < 0) {
+						classNames.push(className);
+					}
+				} else {
+					if (index >= 0) {
+						classNames.splice(index, 1);
+					}
+				}
+				this.className = classNames.join(" ");
+			}
+
+			Node.prototype.show = function show(visible) {
+				this.toggleClass("hidden", !visible);
+			}
+		</script>
+
+		<!-- ============= logDebugMessage and ErrorHandler ========================================= -->
+		<script type="text/javascript">
+			var _firstDebugMessage = true;
+			function logDebugMessage(message) {
+				console.log(message);
+			}
+
+			function dump(obj, desc) {
+				logDebugMessage((desc ? desc + ": " : "") + JSON.stringify(obj, null, "\t"));
+			}
+
+			var ErrorHandler = (function() {
+				return {
+					handle: function(error, context) {
+						this.log(ErrorHandler.format(error, context));
+					},
+
+					format: function(error, context) {
+						if (context)
+							return "Error in '" + context + "':\n" + error.message;
+						return error.message;
+					},
+
+					log: function(str) {
+						document.write(str.split("\n").join("<br />"));
+						logDebugMessage(str);
+					}
+				};
+			})();
+		</script>
+
+		<!-- ============= YouTubeCommentsInterface ========================================= -->
+		<script type="text/javascript">
+			var __apiKey = (typeof YourApiKey !== 'undefined') ? YourApiKey : "";
+			var __channelId =  (typeof YourChannelId !== 'undefined') ? YourChannelId : "";
+
+			function httpGet(theUrl) {
+				var xmlHttp = new XMLHttpRequest();
+				xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+				xmlHttp.send( null );
+				return xmlHttp.responseText;
+			}
+
+			var YouTubeCommentsInterface = (function(apiKey, channelId, httpGetFunc, logFunc) {
+				var _httpGetFunc = httpGetFunc;
+				var _logFunc = logFunc;
+				var _apiKey = apiKey;
+				var _channelId = channelId;
+				var _channelBodyFields = "id,snippet(title,)";
+				var _commentBodyFields = "id,snippet(authorDisplayName,authorProfileImageUrl,authorChannelUrl,publishedAt,textDisplay,updatedAt,videoId)";
+				var _commonFieldsParam = "nextPageToken,pageInfo";
+				var _channelTitle;
+				var _channelThumbnail;
+
+				function _log(msg) {
+					if (!_logFunc)
+						throw new Error("Undefined logFunc");
+					_logFunc(msg);
+				}
+
+				function _httpGet(url) {
+					if (!_httpGetFunc)
+						throw new Error("Undefined httpGetFunc");
+
+					var response = _httpGetFunc(url);
+					var result;
+					try {
+						result = JSON.parse(response);
+					} catch (e) {
+						throw new Error("Could not convert result to JSON. Response = " + response);
+					}
+					if (result.error)
+						throw new Error(result.error.message);
+					return result;
+				}
+
+				// ============ API Methods ============================
+				function _getChannelInfo() {
+					var apiParams = [
+						"key=" + _apiKey,
+						"textFormat=html",
+						"part=snippet",
+						"id=" + _channelId,
+						"fields=" + _commonFieldsParam + ",items(id,snippet(title,thumbnails(default(url))))"
+					];
+					var result = _httpGet("https://www.googleapis.com/youtube/v3/channels?" + apiParams.join("&"));
+					return result;
+				}
+
+				function _getCommentThreadsForChannel_Page(pageToken, maxCommentThreads) {
+					var fieldsParams =
+						_commonFieldsParam + "," +
+						"items(id," +
+							"snippet(topLevelComment(" + _commentBodyFields+ "),videoId,totalReplyCount)," +
+							"replies(comments(" + _commentBodyFields + "))" +
+						")";
+					var maxResults = Math.min(maxCommentThreads || 100, 100);
+					var apiParams = [
+						"key=" + _apiKey,
+						"textFormat=html",
+						"part=snippet,replies",
+						"allThreadsRelatedToChannelId=" + _channelId,
+						"maxResults=" + maxResults,
+						"fields=" + fieldsParams
+					];
+					if (pageToken)
+						apiParams.push("pageToken=" + pageToken);
+
+					var result = _httpGet("https://www.googleapis.com/youtube/v3/commentThreads?" + apiParams.join("&"));
+					return result;
+				}
+
+				function _getCommentThreadsForChannel(maxCommentThreads) {
+					_log("_getCommentThreadsForChannel")
+					var response = _getCommentThreadsForChannel_Page(null, maxCommentThreads);
+					var result = response.items;
+					while (response.nextPageToken && (!maxCommentThreads || result.length <= maxCommentThreads)) {
+						_log("   retrieving next page of results")
+						response = _getCommentThreadsForChannel_Page(response.nextPageToken, maxCommentThreads);
+						response.items.forEach(function(item) {
+							result.push(item);
+						});
+
+						// break;
+					}
+					return result;
+				}
+
+				function _getRepliesForComment_Page(commentId, pageToken) {
+					var fieldsParam =
+						_commonFieldsParam + "," +
+						"items(id," +
+							_commentBodyFields +
+							")";
+					var apiParams = [
+						"key=" + _apiKey,
+						"textFormat=html",
+						"part=snippet",
+						"parentId=" + commentId,
+						"maxResults=100",
+						"fields=" + fieldsParam
+					];
+					if (pageToken)
+						apiParams.push("pageToken=" + pageToken);
+
+					var result = _httpGet("https://www.googleapis.com/youtube/v3/comments?" + apiParams.join("&"));
+					return result;
+				}
+
+				function _getRepliesForComment(commentId) {
+					_log("_getRepliesForComment")
+					var response = _getRepliesForComment_Page(commentId);
+					var result = response.items;
+					while (response.nextPageToken) {
+						_log("   retrieving next page of results")
+						response = _getRepliesForComment_Page(commentId, response.nextPageToken);
+						response.items.forEach(function(item) {
+							result.push(item);
+						});
+					}
+					return result;
+				}
+
+				function _getVideos_Page(videoIds, pageToken) {
+					var apiParams = [
+						"key=" + _apiKey,
+						"part=snippet",
+						"id=" + videoIds.join(","),
+						"fields=" + _commonFieldsParam + ",items(id,snippet(title,thumbnails(medium(url))))"
+					];
+					if (pageToken)
+						apiParams.push("pageToken=" + pageToken);
+
+					var result = _httpGet("https://www.googleapis.com/youtube/v3/videos?" + apiParams.join("&"));
+					return result;
+				}
+
+				function _getVideos(videoIds) {
+					_log("_getVideos");
+					var response = _getVideos_Page(videoIds);
+					var result = response.items;
+					while (response.nextPageToken) {
+						_log("   retrieving next page of results");
+						response = _getVideos_Page(videoIds, response.nextPageToken);
+						response.items.forEach(function(item) {
+							result.push(item);
+						});
+					}
+					return result;
+				}
+
+				// ============ Other Methods ============================
+				function _get48x48AuthorProfileImageUrl(url) {
+					return url.replace(/(\/.*s)28(.*\/photo.jpg)$/,"$1"+"48"+"$2");
+				}
+
+				function _initChannelInfo() {
+					if (_channelTitle)
+						return;
+					_log("Retrieving Channel Info");
+					var channelInfo = _getChannelInfo();
+					_channelTitle = channelInfo.items[0].snippet.title;
+					_channelThumbnail = channelInfo.items[0].snippet.thumbnails.default.url;
+				}
+
+				function _flattenReply(reply) {
+					return {
+						id: reply.id,
+						authorDisplayName: reply.snippet.authorDisplayName,
+						authorProfileImageUrl: _get48x48AuthorProfileImageUrl(reply.snippet.authorProfileImageUrl),
+						authorChannelUrl: reply.snippet.authorChannelUrl,
+						textDisplay: reply.snippet.textDisplay,
+						updatedAt: reply.snippet.updatedAt
+					};
+				}
+
+				function _flattenCommentThreads(threads) {
+					var result = [];
+					threads.forEach(function(thread) {
+						var item = {
+							id: thread.id,
+							videoId: thread.snippet.videoId
+						};
+
+						item.topLevelComment = {
+							id: thread.snippet.topLevelComment.id,
+							videoId: thread.snippet.topLevelComment.snippet.videoId,
+							authorDisplayName: thread.snippet.topLevelComment.snippet.authorDisplayName,
+							authorProfileImageUrl: _get48x48AuthorProfileImageUrl(thread.snippet.topLevelComment.snippet.authorProfileImageUrl),
+							authorChannelUrl: thread.snippet.topLevelComment.snippet.authorChannelUrl,
+							textDisplay: thread.snippet.topLevelComment.snippet.textDisplay,
+							updatedAt: thread.snippet.topLevelComment.snippet.updatedAt
+						};
+
+						item.totalReplyCount = thread.snippet.totalReplyCount;
+						item.replies = [];
+
+						if (thread.replies && thread.replies.comments) {
+							thread.replies.comments.forEach(function(comment) {
+								item.replies.push(_flattenReply(comment));
+							});
+						}
+
+						result.push(item);
+					});
+					return result;
+				}
+
+				function _getMissingReplies(threads) {
+					threads.forEach(function(thread) {
+						if (thread.totalReplyCount > thread.replies.length) {
+							// _log("Getting replies for comment " + thread.topLevelComment.id + ", " + thread.totalReplyCount + " : " + thread.replies.length);
+							var replies = _getRepliesForComment(thread.topLevelComment.id);
+							thread.replies = [];
+							replies.forEach(function(reply) {
+								thread.replies.push(_flattenReply(reply));
+							});
+						}
+					});
+				}
+
+				function _updateCommentThreadsDates(threads) {
+					threads.forEach(function(thread) {
+						thread.mostRecentActivityDate = thread.topLevelComment.updatedAt;
+						thread.replies.forEach(function(reply) {
+							if (reply.updatedAt > thread.mostRecentActivityDate)
+								thread.mostRecentActivityDate = reply.updatedAt;
+						});
+					});
+				}
+
+				function _sortCommentsAndReplies(threads) {
+					threads.sort(function(a, b) {
+						if (a.mostRecentActivityDate < b.mostRecentActivityDate)
+							return 1;
+						if (a.mostRecentActivityDate > b.mostRecentActivityDate)
+							return -1;
+						return 0;
+					});
+					threads.forEach(function(thread) {
+						if (thread.replies.length > 0) {
+							thread.replies.sort(function(a, b) {
+								if (a.updatedAt < b.updatedAt)
+									return 1;
+								if (a.updatedAt > b.updatedAt)
+									return -1;
+								return 0;
+							});
+						}
+					});
+				}
+
+				function _updateCommentThreadsVideoInfo(threads) {
+					var videoIds = [];
+					threads.forEach(function(thread) {
+						if (thread.videoId && videoIds.indexOf(thread.videoId) < 0)
+							videoIds.push(thread.videoId);
+					});
+
+					var videos = _getVideos(videoIds);
+					threads.forEach(function(thread) {
+						if (!thread.videoId) {
+							thread.videoInfo = {
+								title: _channelTitle,
+								thumbnailUrl: _channelThumbnail,
+								isChannelThumbnail: true,
+								watchUrl: "https://www.youtube.com/channel/" + _channelId + "/discussion"
+							};
+						} else {
+							var video = videos.find(function(video) {
+								return video.id === thread.videoId;
+							});
+							if (!video)
+								throw new Error("Could not find video " + thread.videoId);
+							thread.videoInfo = {
+								title: video.snippet.title,
+								thumbnailUrl: video.snippet.thumbnails.medium.url,
+								watchUrl: "https://www.youtube.com/watch?v=" + video.id
+							};
+						}
+					});
+				}
+
+				function _getCommentCounts(threads) {
+					var result = {
+						threadCount: 0,
+						totalCommentCount: 0
+					};
+
+					threads.forEach(function(thread) {
+						result.threadCount++;
+						if (thread.replies)
+							result.totalCommentCount += thread.replies.length;
+					});
+					return result;
+				}
+
+				return {
+					getChannelInfo() {
+						_initChannelInfo();
+						return {
+							title: _channelTitle,
+							thumbnailUrl: _channelThumbnail
+						};
+					},
+
+					getCommentsForChannel: function(maxCommentThreads) {
+						var dtStart = new Date();
+						_initChannelInfo();
+						var rawThreads = _getCommentThreadsForChannel(maxCommentThreads);
+						var threads = _flattenCommentThreads(rawThreads);
+						_getMissingReplies(threads);
+						_updateCommentThreadsDates(threads);
+						_sortCommentsAndReplies(threads);
+						_updateCommentThreadsVideoInfo(threads);
+
+						var counts = _getCommentCounts(threads);
+						var dtEnd = new Date();
+						counts.elapsedTime = dtEnd - dtStart;
+						return {
+							counts: counts,
+							threads: threads
+						};
+					}
+				};
+			})(__apiKey, __channelId, httpGet, console.log);
+		</script>
+
+		<!-- ============= YouTube Logic ========================================= -->
+		<script type="text/javascript">
+			var _loading;
+			var _threadsAndCounts;
+			var __currentThreadIndex;
+
+			// **** CAN CHANGE THIS ****
+			var __maxThreadsToDisplay = 50;
+
+			function addAuthorRow(thread, comment, table, rowClassNames, cellClassNames) {
+				var row = table.insertRow(-1);
+				if (rowClassNames)
+					row.className = rowClassNames;
+				var cell = row.insertCell(-1);
+				cell.className = "tdAuthor" + (cellClassNames ? " " + cellClassNames : "");
+
+				table1 = document.createElement("TABLE");
+				// table1.border = "1";
+				table1.className = "tableAuthor";
+				var row1 = table1.insertRow(-1);
+
+				var cell1 = row1.insertCell(-1);
+				var a = document.createElement("a");
+				var linkText = document.createTextNode(/*__currentThreadIndex + " " + */ comment.authorDisplayName);
+				a.appendChild(linkText);
+				a.title = comment.authorDisplayName;
+				a.href = comment.authorChannelUrl;
+				a.target = "_blank";
+				cell1.appendChild(a);
+
+				cell1 = row1.insertCell(-1);
+				var dt = new Date(comment.updatedAt);
+				cell1.innerText = dt.toLocaleString();
+
+				cell1 = row1.insertCell(-1);
+				cell1.className = "tdUrl";
+				var a = document.createElement("a");
+				var text = "View " + (comment.id === thread.topLevelComment.id ? "comment" : "reply");
+				var linkText = document.createTextNode(text);
+				a.appendChild(linkText);
+				a.title = text;
+				a.href = thread.videoInfo.watchUrl + "&lc=" + comment.id;
+				a.target = "_blank";
+				cell1.appendChild(a);
+
+				cell.appendChild(table1);
+			}
+
+			function showReply(thread, reply, replyIndex, table) {
+				var row;
+				var cell;
+
+				if (replyIndex == 1) {
+					row = table.insertRow(-1);
+					row.id = thread.id + "-more";
+					cell = row.insertCell(-1);
+					cell.className = "tdText tdIndent tdPaddingTop";
+
+					var a = document.createElement("a");
+					var linkText = document.createTextNode("show all replies");
+					a.appendChild(linkText);
+					a.title = "show all replies";
+					a.href = "#";
+					a.onclick = function() {
+						showAllReplies(thread.id);
+					}
+					cell.appendChild(a);
+				}
+
+				var outerReplyTable = document.createElement("TABLE");
+				row = table.insertRow(-1);
+				row.className = thread.id + (replyIndex > 0 ? " hidden" : "");
+				cell = row.insertCell(-1);
+				cell.className = "tdIndent tdPaddingTop";
+				cell.appendChild(outerReplyTable);
+
+				row = outerReplyTable.insertRow(-1);
+				cell = row.insertCell(-1);
+				cell.className = "tdAuthorThumbnail";
+				img = document.createElement("img");
+				img.src = reply.authorProfileImageUrl;
+				cell.appendChild(img);
+
+				cell = row.insertCell(-1);
+				var innerReplyTable = document.createElement("TABLE");
+				cell.appendChild(innerReplyTable);
+
+				addAuthorRow(thread, reply, innerReplyTable, "", "");
+
+				row = innerReplyTable.insertRow(-1);
+				cell = row.insertCell(-1);
+				cell.className = "tdText";
+				cell.innerHTML = reply.textDisplay;
+			}
+
+			function showThread(thread, outerTable) {
+				var table = document.createElement("TABLE");
+				// table.border = "1";
+				table.className = "tableInner";
+				var row = outerTable.insertRow(-1);
+				var cell = row.insertCell(-1);
+				cell.className = "tdPaddingTop";
+				cell.appendChild(table);
+
+				cell = row.insertCell(-1);
+				cell.className = "tdVideoThumbnail tdPaddingTop";
+				img = document.createElement("img");
+				if (!thread.videoInfo.isChannelThumbnail)
+					img.className = "videoThumbnailImage";
+				img.src = thread.videoInfo.thumbnailUrl;
+				cell.appendChild(img);
+
+				row = table.insertRow(-1);
+
+				cell = row.insertCell(-1);
+				cell.className = "tdAuthorThumbnail";
+				img = document.createElement("img");
+				img.src = thread.topLevelComment.authorProfileImageUrl;
+				cell.appendChild(img);
+
+				cell = row.insertCell(-1);
+				cell.className = "tdThreadTable";
+				var threadTable = document.createElement("TABLE");
+				// threadTable.border = "1";
+				threadTable.className = "tableInner";
+				cell.appendChild(threadTable);
+
+				addAuthorRow(thread, thread.topLevelComment, threadTable);
+
+				row = threadTable.insertRow(-1);
+				cell = row.insertCell(-1);
+				cell.className = "tdText";
+				cell.innerHTML = thread.topLevelComment.textDisplay;
+
+				for (var i = 0; i < thread.replies.length; i++) {
+					showReply(thread, thread.replies[i], i, threadTable);
+				}
+
+				row = outerTable.insertRow(-1);
+				cell = row.insertCell(-1);
+				cell.className = "tdThreadSeparator";
+				cell.colSpan = "2";
+				cell.innerHTML = "<hr>"
+			}
+
+			function showThreads(threads, startIndex, threadsToDisplay) {
+				var table;
+				if (startIndex) {
+					table = document.getElementById("threadsTable");
+				} else {
+					table = document.createElement("TABLE");
+					table.id = "threadsTable";
+					// table.border = "1";
+				}
+
+				var result = {
+					displayCount: 0
+				}
+				for (var i = startIndex; i < Math.min(startIndex + threadsToDisplay, threads.length); i++) {
+					__currentThreadIndex = i;
+					showThread(threads[i], table);
+					result.displayCount = i+1;
+				}
+				result.remainingThreads = threads.length - result.displayCount;
+
+				var dvThreads = document.getElementById("dvThreads");
+				if (!startIndex) {
+	            	dvThreads.innerHTML = "";
+	            	dvThreads.appendChild(table);
+				}
+
+				var a;
+				if (result.remainingThreads) {
+					var nextDisplayCount = Math.min(__maxThreadsToDisplay, result.remainingThreads);
+					if (nextDisplayCount < result.remainingThreads) {
+						a = document.getElementById("aLoadNext");
+						a.text = "Display next " +
+							nextDisplayCount + " thread" +
+							(nextDisplayCount > 1 ? "s" : "");
+						a.onclick = function() {
+							showThreadsAndCounts(result.displayCount, nextDisplayCount);
+						};
+						document.getElementById("trLoadText").show(true);
+					} else {
+						document.getElementById("trLoadText").show(false);
+					}
+
+					a = document.getElementById("aLoadRemaining");
+					a.text = "Display remaining " +
+						result.remainingThreads +
+						" thread" + (result.remainingThreads > 1 ? "s" : "");
+					a.onclick = function() {
+						showThreadsAndCounts(result.displayCount, result.remainingThreads);
+					};
+					document.getElementById("dvLoadMore").show(true);
+				}
+
+				return result;
+			}
+
+			function showFooter(displayCounts, threadCounts) {
+				function addRow(table, label, value) {
+					var row = table.insertRow(-1);
+					row.insertCell(-1).innerText = label;
+					row.insertCell(-1).innerText = value;
+				}
+
+				var dvFooter = document.getElementById("dvFooter");
+				dvFooter.innerHtml = "";
+
+				var table = document.createElement("TABLE");
+				// table.border = "1";
+				table.className = "footerTable";
+				var row;
+
+				addRow(table, "Elapsed seconds:", Math.round(_threadsAndCounts.counts.elapsedTime / 1000));
+				addRow(table, "Threads displayed:", displayCounts.displayCount);
+
+				if (displayCounts.remainingThreads)
+					addRow(table, "Threads not displayed:", displayCounts.remainingThreads);
+
+				addRow(table, "Total thread count:", threadCounts.threadCount);
+				addRow(table, "Total comment count:", threadCounts.totalCommentCount);
+				addRow(table, "Last refresh:", (new Date()).toLocaleString());
+
+				dvFooter.innerHTML = "";
+	            dvFooter.appendChild(table);
+			}
+
+			function showThreadsAndCounts(startIndex, threadsToDisplay) {
+				var displayCounts = showThreads(_threadsAndCounts.threads, startIndex, threadsToDisplay);
+				showFooter(displayCounts, _threadsAndCounts.counts);
+			}
+
+			function showAllReplies(threadId) {
+				document.getElementById(threadId + "-more").show(false);
+
+				var rows = document.getElementsByClassName(threadId);
+				console.log("rows.length = " + rows.length);
+				for (var i = 0; i < rows.length; i++) {
+					var row = rows.item(i);
+					console.log("className = '" + row.className + "'");
+					rows.item(i).show(true);
+				}
+			}
+
+			function doGetComments() {
+				try {
+					_loading = true;
+					document.getElementById("dvLoadMore").show(false);
+					_threadsAndCounts = YouTubeCommentsInterface.getCommentsForChannel();
+					showThreadsAndCounts(0, __maxThreadsToDisplay);
+				} catch (e) {
+					ErrorHandler.handle(e, "getComments");
+					throw e;
+				} finally {
+					_loading = false;
+				}
+			}
+
+			function getComments() {
+				if (_loading)
+					return;
+
+				var dvTable = document.getElementById("dvThreads");
+				dvTable.innerText = "Loading...";
+				setTimeout(doGetComments, 100);
+			}
+
+			function initChannelInfo() {
+				try {
+					if (!__apiKey || !__channelId)
+						throw new Error("'YourApiKey' and/or 'YourChannelId' is not defined. You should define them in YouTubeListChannelComments_ChannelIds.js, and that's all that needs to be in this file.");
+
+					var channelInfo = YouTubeCommentsInterface.getChannelInfo();
+					var aChannelThumbnail = document.getElementById("channelThumbnailUrl");
+					aChannelThumbnail.src = channelInfo.thumbnailUrl;
+					var tdChannelTitle = document.getElementById("channelTitle");
+					tdChannelTitle.innerText = channelInfo.title + " Channel Comments";
+				} catch (e) {
+					ErrorHandler.handle(e, "initChannelInfo");
+					throw e;
+				}
+			}
+		</script>
+
+		<!-- ============= Main Body Logic ========================================= -->
+		<script type="text/javascript">
+			window.addEventListener("load", function(event) {
+    			setTimeout(function() {
+					initChannelInfo();
+					getComments();
+				}, 100);;
+  			});
+		</script>
+	</head>
+
+	<body data-kmwindowid="YouTube List Comments (KM)">
+		<div class="page">
+			<header>
+				<h2 id="header">
+					<table align="center">
+						<tr>
+							<td style="padding-right: 20px">
+								<img id="channelThumbnailUrl">
+							</td>
+							<td id="channelTitle">
+							</td>
+						</tr>
+					</table>
+				</h2>
+				<hr>
+			</header>
+
+			<div id="content">
+				<!-- <a href="#" onclick="getComments()">getComments</a>
+				<br/> -->
+
+				<div id="dvThreads">
+				</div>
+				<div id="dvLoadMore" class="hidden">
+					<table id="tableLoadMore">
+						<tr id="trLoadText">
+							<td>
+								<a href="#" id="aLoadNext"></a>
+							</td>
+						</tr>
+						<tr id="trLoadRemaining">
+							<td>
+								<a href="#" id="aLoadRemaining"></a>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<footer>
+				<hr>
+				<div id="dvFooter" class="dvFooter">
+				</div>
+			</footer>
+		</div>
+	</body>
+
+</html>
