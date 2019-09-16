@@ -1,5 +1,3 @@
-Repository Suite
-
 # Macro Repository Suite v1.1.0
 
 > **Requires [Keyboard Maestro](https://www.keyboardmaestro.com) v9 or higher.**
@@ -91,7 +89,7 @@ Each file or folder is named starting with the name of the Group or Macro (purpl
 
 * If the name has characters that aren't valid in a file name, they're replaced with underscores ("_").
 * Also, if the name starts with a period, an underscore is added to the front of the name. This is just to help eliminate any issues with hidden "." files.
-* The extension will be either **.xml**, which is the default, or **.json** if you've selected that [option](#options).
+* The extension will be either **.xml**, which is the default, or **.json** if you've selected that [option](#instance_saveasjson).
 
 Then the Group or Macro's **UUID** (unique identifier) is added to the end (blue bubble). This is to guarantee that the file names are unique.
 
